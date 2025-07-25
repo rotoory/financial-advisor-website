@@ -1,11 +1,26 @@
 import React from 'react';
+import Link from 'next/link';
 
-const BlogPostPreviewCard: React.FC = () => {
+interface BlogPostPreviewCardProps {
+  slug: string;
+  title: string;
+  date: string;
+  excerpt: string;
+}
+
+const BlogPostPreviewCard: React.FC<BlogPostPreviewCardProps> = ({ slug, title, date, excerpt }) => {
   return (
-    <div>
-      <h3>Blog Post Title Placeholder</h3>
-      <p>Publication Date: MM/DD/YYYY</p>
-      <p>Excerpt: This is a short excerpt of the blog post, designed to give readers a quick overview of the content.</p>
+    <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col">
+      <Link href={`/blog/${slug}`} className="block p-6 flex flex-col flex-grow">
+        <h3 className="text-xl md:text-2xl font-bold mb-3 text-blue-800 leading-tight">
+          {title}
+        </h3>
+        <p className="text-gray-500 text-sm mb-4">{date}</p>
+        <p className="text-gray-700 mb-4 flex-grow text-base md:text-lg">
+          {excerpt}
+        </p>
+        <span className="text-blue-600 hover:text-blue-800 font-semibold transition-colors duration-200 mt-auto">Read More &rarr;</span>
+      </Link>
     </div>
   );
 };

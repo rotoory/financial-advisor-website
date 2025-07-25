@@ -5,7 +5,7 @@ import { TipsSection } from "@/components/tips-section";
 
 export default function Home() {
   return (
-    <main>
+    <main className="overflow-hidden">
       <HeroSection />
       <ServicesSummary />
       <AboutSummary />

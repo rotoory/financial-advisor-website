@@ -1,10 +1,15 @@
 import React from 'react';
 
-const ServiceDetailCard: React.FC = () => {
+interface ServiceDetailCardProps {
+  title: string;
+  description: string;
+}
+
+const ServiceDetailCard: React.FC<ServiceDetailCardProps> = ({ title, description }) => {
   return (
-    <div>
-      <h3>Service Title Placeholder</h3>
-      <p>This is a detailed description of the service, outlining its benefits and what clients can expect.</p>
+    <div className="bg-white rounded-lg shadow-md p-6 md:p-8 hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center">
+      <h3 className="text-xl md:text-2xl font-bold mb-4 text-blue-800">{title}</h3>
+      <p className="text-gray-700 leading-relaxed text-base md:text-lg">{description}</p>
     </div>
   );
 };

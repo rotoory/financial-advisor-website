@@ -1,5 +1,6 @@
 import { getPostData, getAllPostSlugs } from '@/lib/posts';
 import CTAButton from '@/components/cta-button';
+import type { Metadata } from 'next';
 
 interface PostPageProps {
   params: {
@@ -14,13 +15,21 @@ export async function generateStaticParams() {
   }));
 }
 
+export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
+  const postData = await getPostData(params.slug);
+  return {
+    title: postData.title,
+    description: postData.excerpt, // Assuming you have an excerpt in your postData
+  };
+}
+
 export default async function PostPage({ params }: PostPageProps) {
   const postData = await getPostData(params.slug);
 
   return (
     <div className="container mx-auto px-4 py-8">
       <article className="prose lg:prose-xl mx-auto">
-        <h1 className="text-4xl font-bold mb-4">{postData.title}</h1>
+        <h1 className="text-4xl md:text-5xl font-bold mb-4">{postData.title}</h1>
         <p className="text-gray-600 mb-6">{postData.date}</p>
         <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
       </article>
